@@ -32,7 +32,7 @@ namespace AbstractFactory
             Console.WriteLine(bottle.NameOfBottle);
             Console.WriteLine(water.NameOfWater);
 
-            //water.ShowMyWater();
+            Console.WriteLine(water.ShowMyWater());
             Console.ReadLine();
 
         }
@@ -99,7 +99,7 @@ namespace AbstractFactory
 
         public override string Interact(AbstractWater abstrWater)
         {
-           return abstrWater.ShowMyWater();
+           return abstrWater.ShowMyWater() + "(Overriden by CocaColaBottle Class. Interact())";
 
         }
     }
