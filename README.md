@@ -1,6 +1,6 @@
-# patterns. Learning some design patterns. 
+# Patterns. Learning some design patterns. 
 
-A test project to help me learn some design patterns.
+This is a test project to help me learning some design patterns. 
 
 
 
