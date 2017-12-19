@@ -78,11 +78,8 @@ namespace Open_Closed_Principle
             return t.Size == _size;
         }
     }
-
-
-
-
-    public class ColorSpecification : ISpecification<Product>
+    
+       public class ColorSpecification : ISpecification<Product>
     {
         private Color _color;
         public ColorSpecification(Color color)
@@ -93,6 +90,22 @@ namespace Open_Closed_Principle
         public bool IsSatisfied(Product t)
         {
             return t.Color == _color;
+        }
+    }
+
+    public class AndSpecification<T> : ISpecification<T>
+    {
+
+        private ISpecification<T> _first, _second;
+        public AndSpecification(ISpecification<T> first, ISpecification<T> second)
+        {
+            _first = first;
+            _second = second;
+        }
+
+        public bool IsSatisfied(T t)
+        {
+            return _first.IsSatisfied(t) && _second.IsSatisfied(t);
         }
     }
 
@@ -125,7 +138,7 @@ namespace Open_Closed_Principle
             Console.WriteLine("Green colors (old): ");
             foreach (var p in fp.FilterByColor(products, Color.Green))
             {
-                Console.WriteLine($"{p.Name} is green");
+                Console.WriteLine($" - {p.Name} is green");
             }
 
 
@@ -134,9 +147,15 @@ namespace Open_Closed_Principle
             Console.WriteLine("Green products (new):");
             foreach (var i in bf.Filter(products, new ColorSpecification(Color.Green)))
             {
-                Console.WriteLine($"{i.Name} is green");
+                Console.WriteLine($" - {i.Name} is green");
             }
 
+            Console.WriteLine("Combined filter: ");
+            foreach (var m in bf.Filter(products, 
+                new AndSpecification<Product>(new SizeSpecification(Size.Large),new ColorSpecification(Color.Blue))))
+            {
+                Console.WriteLine($" - {m.Name} is large and blue");
+            }
             Console.ReadLine();
         }
     }
