@@ -109,8 +109,9 @@ namespace Open_Closed_Principle
         }
     }
 
-    public class BetterFilter : IFilter<Product>
+    public class BetterFilter : IFilter<Product> 
     {
+        //I shouldn't add something in this class. Instead I should create a new class and implement ISpecification interface 
         public IEnumerable<Product> Filter(IEnumerable<Product> items, ISpecification<Product> spec)
         {
             foreach (var i in items)
